@@ -1,0 +1,23 @@
+{
+  "name": "OECD.Direct",
+  "description": "Integration of MessageFocus with OECD Publications",
+  "version": "0.0.2",
+  "author": "@jfix",
+  "permissions": [
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://app.adestra.com/*/html_editor_new",
+        "*://app.adestra.com/*/email_editor"
+      ],
+      "js": [
+        "jquery-2.1.4.js",
+        "add-button.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [],
+  "manifest_version": 2
+}

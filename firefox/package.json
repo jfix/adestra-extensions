@@ -1,10 +1,10 @@
 {
   "title": "OECD.Direct",
   "name": "adestra-firefox-extension",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Integration of MessageFocus with OECD Publications",
   "main": "index.js",
-  "author": "Jakob Fix",
+  "author": "@jfix",
   "engines": {
     "firefox": ">=38.0a1",
     "fennec": ">=38.0a1"
