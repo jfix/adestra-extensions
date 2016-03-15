@@ -8,10 +8,9 @@ The repository contains currently two extensions, one for Chrome and one for Fir
 
 ### Packaging
 
+> Mainly as a reminder for myself.
 
-Mainly as a reminder for myself.
-
-Chrome: https://developer.chrome.com/extensions/packaging
+Chrome: https://developer.chrome.com/extensions/packaging (keep your `.pem` file safe but handy ...).
 
 Firefox (`node`-based `jpm` tool is necessary):
 
@@ -27,7 +26,7 @@ more information: https://developer.mozilla.org/en-US/Add-ons/SDK/Tutorials/Gett
 
 ## TODOs
 
-* create an `ant` file that builds the extensions.
+* create an `ant` (or `gulp`?) file that builds the extensions.
 * refactor common code (see `add-button.js`)
 * set up automatic updates through releases on github (or elsewhere)
 * more documentation
