@@ -11,6 +11,7 @@ The repository contains currently two extensions, one for Chrome and one for Fir
 > Mainly as a reminder for myself.
 
 Chrome: https://developer.chrome.com/extensions/packaging (keep your `.pem` file safe but handy ...).
+Also, and more importantly: https://chrome.google.com/webstore/developer/dashboard
 
 Firefox (`node`-based `jpm` tool is necessary):
 
