@@ -19,7 +19,7 @@ var live = function(selector, eventType, callback) {
   });
 };
 
-var targetUrl = "http://vs-pac-int-2/oecd.direct",
+var targetUrl = "http://vs-pac-int-2.main.oecd.org/OECD.Direct/",
     targetWindowHeight = 800,
     targetWindowWidth = 700,
     options = "height=" + targetWindowHeight + " , width=" + targetWindowWidth,
