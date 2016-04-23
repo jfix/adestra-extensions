@@ -1,3 +1,12 @@
+/*
+  Content script that is referred to in manifest.json
+  attempts to inject a button into the editor's
+  user interface and to register a click event.
+  On click, this will open the OECD.direct interface.
+
+  CHROME OR FIREFOX EXTENSION - will work for both
+*/
+
 // helper function to correctly find injected button
 // inspired from: http://stackoverflow.com/questions/16694269/any-emulation-or-alternative-of-live-jquery-function-that-addan-enent-listner-fo
 var live = function(selector, eventType, callback) {
@@ -91,8 +100,9 @@ if (document.location.href.indexOf("html_editor_new") > -1) {
     childList: true,
     subtree: true
   };
-  // Listen to all changes to body and child nodes
-  _observer.observe(document.querySelector("div.emled-inputs-controls"), observerConfig);
+  // Listen to child node and subtree changes
+  var elt = document.querySelector("div.emled-inputs-controls");
+  if(elt) _observer.observe(elt, observerConfig);
 
 //
 // UNKNOWN URL
