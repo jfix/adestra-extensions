@@ -18,7 +18,7 @@ var targetUrl = "http://oe.cd/Direct",
 
 
 //
-// PREVIOuS HTML EDITOR
+// PREVIOUS HTML EDITOR
 //
 
 if (document.location.href.indexOf("html_editor_new") > -1) {
