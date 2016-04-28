@@ -67,33 +67,47 @@ if (document.location.href.indexOf("html_editor_new") > -1) {
 //
 // EMAIL EDITOR
 //
+// the current
+//
 } else if (document.location.href.indexOf("email_editor") > -1) {
-  var separator = '<span class="cke_toolbar_separator" role="separator"></span>',
-      new_editor_button = ('<a id="cke_oecd_pubs_button" ' +
-        'role="button" class="cke_button cke_button_off" ' +
-        'href="javascript:void(\'Add publication\')" ' +
-        'title="Add publication" ' +
-        'tabindex="-1" hidefocus="true" ' +
-        'aria-labelledby="cke_oecd_pubs_button_label" aria-haspopup="false" ' +
-        '>' +
-          '<span class="cke_button_icon" style="background-image:url(\'' + logo + '\');">&nbsp;</span>' +
-          '<span id="cke_oecd_pubs_button_label" class="cke_button_label" aria-hidden="false">Add publication</span>'+
-        '</a>');
+
   var _observer = new MutationObserver(function(mutations) {
-    try {
-      var b = document.querySelector('a.cke_button__pastefromword');
-      var o = document.querySelector('a#cke_oecd_pubs_button');
-      if (b && !o) {
-        b.insertAdjacentHTML("afterend", new_editor_button);
-        b.insertAdjacentHTML("afterend", separator);
-        console.log("OECD MessageFocus button for EMAIL EDITOR successfully injected.");
+      try {
+        // whenever there is a change observed, look for the
+        // email tools combo button
+        var buttons = document.querySelectorAll('span.cke_combo__emailtools');
+
+        for (var i = 0; i < buttons.length; i++) {
+          // for each such button ...
+          var b = buttons[i];
+
+          var new_editor_button = ('<span class="cke_toolgroup" role="presentation">' +
+            '<a id="cke_oecd_pubs_button_' + i + '" ' +
+            'role="button" class="cke_button cke_button_off cke_oecd_pubs_button" ' +
+            'href="javascript:void(\'Add publications\')" ' +
+            'title="Add publications" ' +
+            'tabindex="-1" hidefocus="true" ' +
+            'aria-labelledby="cke_oecd_pubs_button_label_' + i + '" aria-haspopup="false" ' +
+            '>' +
+              '<span class="cke_button_icon" style="background-image:url(\'' + logo + '\');">&nbsp;</span>' +
+              '<span id="cke_oecd_pubs_button_label_' + i + '" class="cke_button_label" aria-hidden="false">Add publications</span>'+
+            '</a></span>');
+
+          // ... check whether a publication button has already been inserted
+          var o = b.parentNode.querySelector('a.cke_oecd_pubs_button');
+          if (b && !o) {
+            // if not inject one
+            b.insertAdjacentHTML("afterend", new_editor_button);
+            console.log("OECD MessageFocus button for EMAIL EDITOR successfully injected.");
+          }
+          // and associate it with an action
+          live('a#cke_oecd_pubs_button_' + i, 'click', function() {
+            window.open(targetUrl, "OECD.direct", options);
+          })
+        }
+      } catch(e) {
+        console.log("OECD Adestra button for EMAIL EDITOR injection failed: " + e.message);
       }
-      live('a#cke_oecd_pubs_button', 'click', function() {
-        window.open(targetUrl, "OECD.direct", options);
-      })
-    } catch(e) {
-      console.log("OECD Adestra button for EMAIL EDITOR injection failed: " + e.message);
-    }
   });
 
   var observerConfig = {
