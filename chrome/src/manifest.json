@@ -1,7 +1,7 @@
 {
   "name": "OECD.Direct",
   "description": "Integration of MessageFocus with OECD Publications",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "author": "@jfix",
   "permissions": [
     "activeTab"
@@ -19,7 +19,7 @@
   ],
   "icons": {
     "48": "assets/oecd-logo-48.png",
-    "128": "assets/oecd-logo-128.png" 
+    "128": "assets/oecd-logo-128.png"
   },
   "manifest_version": 2
 }
