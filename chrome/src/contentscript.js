@@ -19,7 +19,7 @@ var live = function(selector, eventType, callback) {
   });
 };
 
-var targetUrl = "http://oe.cd/Direct",
+var targetUrl = "http://vs-pac-int-2.main.oecd.org/OECD.Direct/",
     targetWindowHeight = 800,
     targetWindowWidth = 700,
     options = "height=" + targetWindowHeight + " , width=" + targetWindowWidth + ", scrollbars=yes",
@@ -72,37 +72,39 @@ if (document.location.href.indexOf("html_editor_new") > -1) {
 } else if (document.location.href.indexOf("email_editor") > -1) {
 
   var _observer = new MutationObserver(function(mutations) {
+      var selectorToObserve = "div.control.is-source.is-childof-publication_section div.control-header-inputs";
       try {
-        // whenever there is a change observed, look for the
-        // email tools combo button
-        var buttons = document.querySelectorAll('span.cke_combo__emailtools');
+        // whenever there is a change observed, look for
+        // this very specific CSS selector (defined above)
+        var buttonSection = document.querySelectorAll(selectorToObserve);
 
-        for (var i = 0; i < buttons.length; i++) {
-          // for each such button ...
-          var b = buttons[i];
+        for (var i = 0; i < buttonSection.length; i++) {
 
-          var new_editor_button = ('<span class="cke_toolgroup" role="presentation">' +
-            '<a id="cke_oecd_pubs_button_' + i + '" ' +
-            'role="button" class="cke_button cke_button_off cke_oecd_pubs_button" ' +
-            'href="javascript:void(\'Add publications\')" ' +
-            'title="Add publications" ' +
-            'tabindex="-1" hidefocus="true" ' +
-            'aria-labelledby="cke_oecd_pubs_button_label_' + i + '" aria-haspopup="false" ' +
-            '>' +
-              '<span class="cke_button_icon" style="background-image:url(\'' + logo + '\');">&nbsp;</span>' +
-              '<span id="cke_oecd_pubs_button_label_' + i + '" class="cke_button_label" aria-hidden="false">Add publications</span>'+
-            '</a></span>');
+          // for each such button section found ...
+          var b = buttonSection[i];
+
+          // create a new button HTML string ...
+          var new_editor_button = (
+            '<span id="publications_html-' + i + '"' +
+              ' class="icon oecd_pubs_button"' +
+              ' title="Add a publication"' +
+              ' style="cursor: pointer; margin-left: 20px; width:16px !important;">' +
+              '<img style="margin-bottom: -3px;" src="'+logo+'"/>' +
+            '</span>'
+          );
 
           // ... check whether a publication button has already been inserted
-          var o = b.parentNode.querySelector('a.cke_oecd_pubs_button');
+          var o = b.querySelector('span.oecd_pubs_button');
           if (b && !o) {
-            // if not inject one
-            b.insertAdjacentHTML("afterend", new_editor_button);
+            // if not, inject one
+            b.insertAdjacentHTML("afterbegin", new_editor_button);
             console.log("OECD MessageFocus button for EMAIL EDITOR successfully injected.");
           }
-          // and associate it with an action
-          live('a#cke_oecd_pubs_button_' + i, 'click', function() {
+          live('span#publications_html-' + i, 'click', function(evt) {
+            // associate it with the click action ...
             window.open(targetUrl, "OECD.direct", options);
+            // ... and highlight the textarea content for easier replacement
+            evt.target.closest(".is-childof-publication_section").querySelector("textarea").select();
           })
         }
       } catch(e) {
