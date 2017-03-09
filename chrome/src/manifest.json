@@ -1,8 +1,8 @@
 {
   "name": "OECD.Direct",
   "description": "Integration of MessageFocus with OECD Publications",
-  "version": "3.2.0",
-  "author": "@jfix",
+  "version": "3.3.0",
+  "author": "Jakob Fix <jakob.fix@gmail.com>",
   "permissions": [
     "activeTab"
   ],
